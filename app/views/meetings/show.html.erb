@@ -48,7 +48,8 @@
   <p>No invitees yet.</p>
 <% end %>
 
-    <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900  font-secondary">Invite Others</h2>
+<%if can? :manage, @meeting%>
+  <h2 class="mb-4 text-3xl lg:text-4xl tracking-tight font-extrabold text-gray-900  font-secondary">Invite Others</h2>
 <%= form_with(model: @meeting, url: invite_meeting_path(@meeting), method: :patch) do |form| %>
   <div class="form-group flex gap-5">
     <%= form.label :invitee_email , class: "my-auto"%>
@@ -59,4 +60,5 @@
 <% end %>
 
  </div>
+<%end%>
 

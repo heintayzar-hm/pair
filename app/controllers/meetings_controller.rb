@@ -39,11 +39,11 @@ class MeetingsController < ApplicationController
 
     if invitee.nil?
     # User with the email does not exist, send email to unregistered user
-    #  MeetingMailer.invitation_email_unregistered(@meeting, email).deliver_now # later
-    else
+    MeetingMailer.with(meeting: @meeting).invitation_email(invitee, @meeting).deliver_now # later
+  else
       # User with the email exists, associate them with the meeting
       @meeting.invitees << invitee
-      #  MeetingMailer.invitation_email_registered(@meeting, invitee).deliver_now # later
+       MeetingMailer.with(meeting: @meeting).invitation_email(invitee, @meeting).deliver_now # later
     end
 
     redirect_to @meeting, notice: 'Invitations sent successfully.'
