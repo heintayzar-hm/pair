@@ -1,0 +1,17 @@
+<h1>Please Pick the following avaliables Date</h1>
+
+<% @available_meetings.each do |meeting| %>
+    <div class="meeting">
+        <p><strong>Name:</strong> <%= link_to meeting.name, meeting_path(meeting) %></p>
+        <p><strong>Description:</strong> <%= meeting.description %></p>
+        <p><strong>Start Time:</strong> <%= meeting.start_time.strftime("%A, %B %e, %Y at %l:%M %p") %></p>
+
+
+        <% if meeting.user == current_user %>
+        <%= link_to 'Edit', edit_meeting_path(meeting) %>
+        <%= link_to 'Delete', meeting_path(meeting), method: :delete, data: { confirm: 'Are you sure?' } %>
+        <% end %>
+
+        <%= button_to 'Join' , join_random_meeting_path(meeting), method: :post %>
+    </div>
+<% end %>

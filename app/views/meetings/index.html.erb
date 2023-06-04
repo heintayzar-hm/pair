@@ -1,0 +1,20 @@
+<h1>Meeting</h1>
+
+<% @meetings.each do |meeting| %>
+  <div class="meeting">
+    <p><strong>Name:</strong> <%= link_to meeting.name, meeting_path(meeting) %></p>
+    <p><strong>Description:</strong> <%= meeting.description %></p>
+    <p><strong>Start Time:</strong> <%= meeting.start_time.strftime("%A, %B %e, %Y at %l:%M %p") %></p>
+
+    <% if meeting.is_public? %>
+      <p><strong>Public:</strong> Yes</p>
+    <% else %>
+      <p><strong>Public:</strong> No</p>
+    <% end %>
+
+    <% if meeting.user == current_user %>
+      <%= link_to 'Edit', edit_meeting_path(meeting) %>
+      <%= link_to 'Delete', meeting_path(meeting), method: :delete, data: { confirm: 'Are you sure?' } %>
+    <% end %>
+  </div>
+<% end %>

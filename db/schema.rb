@@ -10,9 +10,39 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_04_125816) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_04_170504) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "invitations", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "meeting_id"
+    t.string "status"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["meeting_id"], name: "index_invitations_on_meeting_id"
+    t.index ["user_id"], name: "index_invitations_on_user_id"
+  end
+
+  create_table "meetings", force: :cascade do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.text "description"
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.string "zoom_link"
+    t.string "invitee_emails_array", default: [], array: true
+    t.boolean "is_public", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_meetings_on_user_id"
+  end
+
+  create_table "programming_languages", force: :cascade do |t|
+    t.string "name", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -24,6 +54,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_125816) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
+    t.string "name"
     t.string "experience_level"
     t.string "programming_languages"
     t.datetime "created_at", null: false
@@ -32,4 +63,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_04_125816) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "invitations", "meetings"
+  add_foreign_key "invitations", "users"
+  add_foreign_key "meetings", "users"
 end

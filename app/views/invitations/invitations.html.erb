@@ -1,0 +1,23 @@
+<h1>Invitations</h1>
+
+<% @invitations.each do |invitation| %>
+  <div class="invitation">
+    <p><strong>Meeting:</strong> <%= invitation.meeting.name %></p>
+    <p><strong>Description:</strong> <%= invitation.meeting.description %></p>
+    <p><strong>Start Time:</strong> <%= invitation.meeting.start_time.strftime("%A, %B %e, %Y at %l:%M %p") %></p>
+
+    <% if invitation.pending? %>
+      <%= form_with(url: accept_invitation_path(invitation), method: :post) do |form| %>
+        <%= form.submit 'Accept' %>
+      <% end %>
+
+      <%= form_with(url: reject_invitation_path(invitation), method: :post) do |form| %>
+        <%= form.submit 'Reject' %>
+      <% end %>
+    <% elsif invitation.accepted? %>
+      <p>Accepted</p>
+    <% elsif invitation.rejected? %>
+      <p>Rejected</p>
+    <% end %>
+  </div>
+<% end %>

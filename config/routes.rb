@@ -13,4 +13,13 @@ Rails.application.routes.draw do
   end
 
   get 'home/index' , to: 'home#index', as: 'home_index'
+  resources :meetings do
+    patch 'invite', on: :member
+    patch 'random_invite', on: :member
+  end
+  get '/random_meeting', to: 'meetings#random_meeting', as: 'random_meeting'
+  post '/random_meeting/:id', to: 'meetings#join_random_meeting', as: 'join_random_meeting'
+  get '/invitations', to: 'invitations#invitations', as: 'invitations'
+  post '/invitations/:id/accept', to: 'invitations#accept', as: 'accept_invitation'
+  post '/invitations/:id/reject', to: 'invitations#reject', as: 'reject_invitation'
 end

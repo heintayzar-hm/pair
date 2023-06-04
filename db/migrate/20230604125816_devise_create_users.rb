@@ -34,6 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration[7.0]
 
       ## Custom fields
 
+      t.string :name
       t.string :experience_level
       t.string :programming_languages
 
