@@ -266,7 +266,7 @@ If you like this project...
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
 
-I would like to thank [hacklah](https://devpost.com/submit-to/18283-hacklah/manage/submissions)
+I would like to thank [hacklah](https://hacklah.devpost.com/)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
