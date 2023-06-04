@@ -32,7 +32,7 @@ class MeetingsController < ApplicationController
     email = invite_params[:invitee_email] # just for easier naming
 
     # save the email in the meeting
-    @meeting.invitee_emails_array << email if @meeting.invitee_emails_array.exclude?(email) && email.present?
+    @meeting.invitee_emails_array << email if @meeting.invitee_emails_array.exclude?(email) && email.present? && current_user.email != email
     @meeting.save
     # Check if user with the email exists
     invitee = User.find_by(email:)

@@ -9,19 +9,46 @@
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,300;1,400;1,700&family=Lobster&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+     <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'secondary': '#0284c7',
+              'primary': '#22d3ee',
+              'teritertary': 'brown',
+            },
+             boxShadow: {
+              focus: '0px 0px 20px 1px #00BFFF',
+              "custom": '-1px 1px 20px 7px #22d3ee'
+            },
+        },
+        fontFamily: {
+              'teritertary': ['Inter var'],
+              'secondary': ['Lobster'],
+              'primary': ['Josefin Sans'],
+          },
+      },
+          }
+    </script>
   </head>
 
-  <body>
+  <body class="font-teritertary sm:text-lg text-sm tracking-wide break-words white">
+      <%= render partial: "/components/navbar" %>
     <%# Messages %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-
-    <%# Logout button    %>
-    <% if user_signed_in? %>
-      <%= button_to "Logout", destroy_user_session_path, method: :delete %>
-    <% end %>
+    <div>
+        <%if notice%>
+          <p class="notice text-xl bg-green-700 text-white text-center my-1 py-2"><%= notice %></p>
+        <%end%>
+        <% if alert%>
+          <p class="alert text-xl bg-red-500 text-white text-center py-2 my-1"><%= alert %></p>
+        <%end%>
+      </div>
     <%= yield %>
   </body>
 </html>

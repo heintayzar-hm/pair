@@ -1,31 +1,35 @@
 <%# Path: app/views/meetings/new.html.erb %>
 
-<h1>New Meeting</h1>
+<h1 class="text-center font-bold font-secondary text-3xl py-10">Create New Meeting For Your Collab</h1>
 
 <%= form_with(model: @meeting, url: meetings_path, method: :post) do |form| %>
-  <div class="form-group">
-    <%= form.label :name %>
-    <%= form.text_field :name, class: 'form-control' %>
+  <div class="flex flex-col text-lg items-start px-3 font-normal gap-5">
+      <div class="form-group grid sm:grid-cols-3 w-[100%] md:w-[60%] justify-center gap-5">
+    <%= form.label :name, class:"text-center m-auto col-span-1" %>
+    <%= form.text_field :name,placeholder:"Ruby Disscussion", class: 'form-control col-span-2 foucs:border focus:dark:shadow-custom mt-3 rounded-lg  border px-2 focus:outline-none w-full py-2 text-xl' %>
   </div>
 
-<div class="form-group">
-  <%= form.label :date %>
-  <%= form.text_field :start_time, class: 'flatpickr form-control', data: { enableTime: true, noCalendar: true, dateFormat: 'H:i', minuteIncrement: 45 } %>
+<div class="form-group grid sm:grid-cols-3 w-[100%] md:w-[60%] justify-center gap-5">
+  <%= form.label :date, class:"m-auto col-span-1" %>
+  <%= form.datetime_field :start_time,placeholder:"Choose a date", class: 'flatpickr form-control col-span-2 foucs:border focus:dark:shadow-custom mt-3 rounded-lg  border px-2 focus:outline-none w-full py-2 text-xl text-black', data: { enableTime: true, noCalendar: true, dateFormat: 'H:i', minuteIncrement: 45 } %>
 </div>
 
 
-  <div class="form-group">
-    <%= form.label :description %>
-    <%= form.text_area :description, class: 'form-control' %>
+  <div class="form-group grid sm:grid-cols-3 w-[100%] md:w-[60%] justify-center gap-5">
+    <%= form.label :description , class:"m-auto col-span-1"%>
+    <%= form.text_area :description,placeholder:"Describe in two to three sentences", rows: "5", class: 'form-control col-span-2 foucs:border focus:dark:shadow-custom mt-3 rounded-lg  border px-2 focus:outline-none w-full py-2 text-xl' %>
   </div>
 
-<div class="form-group">
+<div class="form-group flex items center justify-center w-[100%] md:w-[60%] gap-3" title="Other people can join too">
   <%= form.check_box :is_public, class: 'form-control' %>
-  avaliable to all?
+  make it public
 </div>
 
 
-  <%= form.submit 'Create Meeting', class: 'btn btn-primary' %>
+ <div class="w-[100%] md:w-[60%] flex items-center justify-center">
+   <%= form.submit 'Create Meeting', class: 'btn bg-primary hover:bg-secondary transition-all duration-75 ease-in' %>
+ </div>
+  </div>
 <% end %>
 
 <script>

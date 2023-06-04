@@ -8,4 +8,8 @@ class ApplicationController < ActionController::Base
       home_index_path
     end
   end
+
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
+  end
 end

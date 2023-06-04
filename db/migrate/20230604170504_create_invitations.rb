@@ -3,7 +3,7 @@ class CreateInvitations < ActiveRecord::Migration[7.0]
     create_table :invitations do |t|
       t.references :user, foreign_key: true
       t.references :meeting, foreign_key: true
-      t.string :status
+      t.string :status, default: "pending"
       t.timestamps
     end
   end
