@@ -17,7 +17,7 @@
  :root {
     --primary-color: #0284c7;
     --secondary-color: white;
-    --highlight-color: rgb(225, 0, 255);
+    --highlight-color: hsl(293, 100%, 50%);
     --highlight-dark-color: rgb(0, 20, 240);
   }
 

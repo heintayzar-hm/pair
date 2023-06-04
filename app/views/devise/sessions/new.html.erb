@@ -1,14 +1,14 @@
-<h2>Log in</h2>
+<h2 class="font-bold font-secondary text-3xl font-bold rounded-md text-center my-5">Log in</h2>
 
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-  <div class="field">
+<%= form_for(resource, as: resource_name, url: session_path(resource_name),:html => {:class => "flex flex-col text-lg min-w-[300px] items-center font-normal gap-5"} ) do |f| %>
+  <div class="field field py-4 w-full sm:w-[50%]">
     <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.email_field :email, autofocus: true, autocomplete: "email", class:"dark:text-black border focus:dark:border-darkTheme foucs:border focus:dark:shadow-custom mt-3 rounded-lg  border px-2 focus:outline-none w-full py-2 text-xl" %>
   </div>
 
-  <div class="field">
+  <div class="field field py-4 w-full sm:w-[50%]">
     <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "current-password" %>
+    <%= f.password_field :password, autocomplete: "current-password", class:"dark:text-black border focus:dark:border-darkTheme foucs:border focus:dark:shadow-custom mt-3 rounded-lg  border px-2 focus:outline-none w-full py-2 text-xl" %>
   </div>
 
   <% if devise_mapping.rememberable? %>
@@ -18,9 +18,9 @@
     </div>
   <% end %>
 
-  <div class="actions">
-    <%= f.submit "Log in" %>
+  <div class="action text-center flex justify-evenly w-full w-full sm:w-[50%] flex-col gap-3">
+    <%= f.submit "Log in", class: "text-center bg-primary text-white p-3 rounded-lg hover:bg-secondary cursor-pointer" %>
+    <%= render "devise/shared/links" %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>

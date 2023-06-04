@@ -1,6 +1,7 @@
     <nav class="bg-primary  z-50">
       <div class="logo hidden sm:block">
-                logo
+      <%# Must change logo %>
+          <%= link_to "Meeter", root_path, class: "" %>
       </div>
       <div class="nav-links">
         <% if user_signed_in? %>
