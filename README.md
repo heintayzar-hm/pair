@@ -26,9 +26,6 @@ After you're finished please remove all the comments and instructions!
 -->
 
 <div align="center">
-  <!-- You are encouraged to replace this logo with your own! Otherwise you can also remove it. -->
-  <img src="murple_logo.png" alt="logo" width="140"  height="auto" />
-  <br/>
 
   <h3><b>Meeting For You</b></h3>
 
@@ -264,8 +261,8 @@ If you like this project, please give me a star.
 
 ## 🙏 Acknowledgments <a name="acknowledgements"></a>
 
-
 I would like to thank [hacklah](https://hacklah.devpost.com/)
+Thank you very much for [flowbite](https://flowbite.com/blocks/publisher/blog-templates/) for some designs.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
