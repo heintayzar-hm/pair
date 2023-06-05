@@ -53,13 +53,29 @@ class ZoomService
   private
 
   def refresh_access_token
-    refresh_url = "#{BASE_URL}/oauth/token"
+    refresh_url = "https://zoom.us/oauth/token"
+    client_id = "bUb16wVdSuebXOlMPWOqFg" # just for testing will be removed and replaced with env variables
+    client_secret = "FMOc95fcgWks4YG1wRlV2G5DN4UOplNm"  # just for testing will be removed and replaced with env variables
     params = {
       grant_type: 'refresh_token',
       refresh_token: @refresh_token
     }
 
-    response = Net::HTTP.post_form(URI(refresh_url), params)
+    headers = {
+      'Authorization' => "Basic #{Base64.strict_encode64("#{client_id}:#{client_secret}")}"
+    }
+
+    uri = URI.parse(refresh_url)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+
+    request = Net::HTTP::Post.new(uri.path)
+    request.set_form_data(params)
+    headers.each do |key, value|
+      request[key] = value
+    end
+
+    response = http.request(request)
     if response.code.to_i == 200
       data = JSON.parse(response.body)
       @access_token = data['access_token']
@@ -69,4 +85,5 @@ class ZoomService
       raise "Failed to refresh the access token: #{response.body}"
     end
   end
+
 end
