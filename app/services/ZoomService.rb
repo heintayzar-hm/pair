@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'net/http'
 require 'json'
 
@@ -20,12 +22,12 @@ class ZoomService
     request['Authorization'] = "Bearer #{@access_token}"
 
     request.body = {
-      topic: topic,
+      topic:,
       type: 2,
-      start_time: start_time,
-      duration: duration,
-      timezone: timezone,
-      agenda: agenda,
+      start_time:,
+      duration:,
+      timezone:,
+      agenda:,
       settings: {
         host_video: true,
         participant_video: true
@@ -38,13 +40,12 @@ class ZoomService
       JSON.parse(response.body)
     elsif response.code.to_i == 124 || response.code.to_i == 401 # Expired access token
       @retry_count ||= 0
-      if @retry_count < MAX_RETRY_COUNT
-        refresh_access_token
-        @retry_count += 1
-        create_meeting(topic, start_time, duration, timezone, agenda) # Retry the request
-      else
-        raise "Failed to create Zoom meeting: maximum retry attempts reached."
-      end
+      raise 'Failed to create Zoom meeting: maximum retry attempts reached.' unless @retry_count < MAX_RETRY_COUNT
+
+      refresh_access_token
+      @retry_count += 1
+      create_meeting(topic, start_time, duration, timezone, agenda) # Retry the request
+
     else
       raise "Failed to create Zoom meeting: #{response.body}"
     end
@@ -53,9 +54,9 @@ class ZoomService
   private
 
   def refresh_access_token
-    refresh_url = "https://zoom.us/oauth/token"
-    client_id = "bUb16wVdSuebXOlMPWOqFg" # just for testing will be removed and replaced with env variables
-    client_secret = "FMOc95fcgWks4YG1wRlV2G5DN4UOplNm"  # just for testing will be removed and replaced with env variables
+    refresh_url = 'https://zoom.us/oauth/token'
+    client_id = 'bUb16wVdSuebXOlMPWOqFg' # just for testing will be removed and replaced with env variables
+    client_secret = 'FMOc95fcgWks4YG1wRlV2G5DN4UOplNm' # just for testing will be removed and replaced with env variables
     params = {
       grant_type: 'refresh_token',
       refresh_token: @refresh_token
@@ -76,14 +77,11 @@ class ZoomService
     end
 
     response = http.request(request)
-    if response.code.to_i == 200
-      data = JSON.parse(response.body)
-      @access_token = data['access_token']
-      @refresh_token = data['refresh_token'] unless data['refresh_token'].nil?
-      puts 'Access token refreshed successfully.'
-    else
-      raise "Failed to refresh the access token: #{response.body}"
-    end
-  end
+    raise "Failed to refresh the access token: #{response.body}" unless response.code.to_i == 200
 
+    data = JSON.parse(response.body)
+    @access_token = data['access_token']
+    @refresh_token = data['refresh_token'] unless data['refresh_token'].nil?
+    puts 'Access token refreshed successfully.'
+  end
 end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class UserSelectionsController < ApplicationController
   def experience
     # Render the experience selection view
@@ -8,7 +10,6 @@ class UserSelectionsController < ApplicationController
     # Redirect to the programming languages selection page
     current_user.update(experience_level: params[:experience_level])
     redirect_to user_programming_languages_path
-
   end
 
   def programming_languages

@@ -7,10 +7,11 @@ class Ability
     can :read, Meeting, public: true
 
     return unless user.present?
-    can :manage, Meeting, user: user
+
+    can(:manage, Meeting, user:)
 
     return unless user.id == 1
+
     can :all, Meeting
   end
-
 end

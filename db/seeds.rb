@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
 #
@@ -11,23 +13,21 @@ ProgrammingLanguage.create(name: 'JavaScript')
 ProgrammingLanguage.create(name: 'Python')
 ProgrammingLanguage.create(name: 'Java')
 
-puts "Programming languages created"
-
+puts 'Programming languages created'
 
 User.create(
   email: 'heintayzarhm@gmail.com',
   name: 'Hein Tay Zar',
-  password: 'password',
+  password: 'password'
 )
 
 User.create(
   email: 'heintayzartech@gmail.com',
-  name: "hein",
-  password: 'password',
+  name: 'hein',
+  password: 'password'
 )
 
-puts "Users created"
-
+puts 'Users created'
 
 Meeting.create(
   start_time: DateTime.now + 1.day,
@@ -40,7 +40,7 @@ Meeting.create(
   is_public: true
 )
 
-puts "Meeting created"
+puts 'Meeting created'
 
 Invitation.create(
   status: 'pending',

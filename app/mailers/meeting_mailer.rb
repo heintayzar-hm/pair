@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MeetingMailer < ApplicationMailer
   def invitation_email(invitee_email, meeting)
     @invitee_email = invitee_email

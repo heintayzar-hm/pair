@@ -1,24 +1,26 @@
+# frozen_string_literal: true
+
 class Invitation < ApplicationRecord
   belongs_to :user
   belongs_to :meeting
 
   def pending?
-    status == "pending"
+    status == 'pending'
   end
 
   def accepted?
-    status == "accepted"
+    status == 'accepted'
   end
 
   def rejected?
-    status == "rejected"
+    status == 'rejected'
   end
 
   def accept
-    update(status: "accepted")
+    update(status: 'accepted')
   end
 
   def reject
-    update(status: "rejected")
+    update(status: 'rejected')
   end
 end
