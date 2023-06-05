@@ -89,7 +89,7 @@ After you're finished please remove all the comments and instructions!
 
 - **[Finding_pair_programming_sessions]**
 - **[Scheduling_pair_programming_sessions]**
-
+- **[Fully_RESPONSIVE_DESGIN]**
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- LIVE DEMO -->
